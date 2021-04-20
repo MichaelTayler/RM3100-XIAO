@@ -35,15 +35,15 @@ void loop() {
   rawZ[2]=SPI.transfer(0x00); 
   digitalWrite(SS_pin, HIGH); 
   
-  mx=(65536*rawX[0]+256*rawX[1]+rawX[2]);  // Reconstruct 24-bit sensor data values
-  my=(65536*rawY[0]+256*rawY[1]+rawY[2]); 
-  mz=(65536*rawZ[0]+256*rawZ[1]+rawZ[2]);  
+  mx=((65536*rawX[0]+256*rawX[1]+rawX[2])<<8)/1000;  // Reconstruct 24-bit sensor data values
+  my=((65536*rawY[0]+256*rawY[1]+rawY[2])<<8)/1000; 
+  mz=((65536*rawZ[0]+256*rawZ[1]+rawZ[2])<<8)/1000;  
   
   Serial.print(mx);    // print MX data to PC
   Serial.print(" ");    
   Serial.print(my);    // print MY data to PC
   Serial.print(" "); 
-  Serial.println(mz);  // print MZ data to PC
+  Serial.println(mz);  // print MZ data to PC.  Use Tools/SerialPlotter to visualize
   
 }
 
